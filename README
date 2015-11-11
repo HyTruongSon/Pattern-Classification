@@ -1,0 +1,156 @@
+Software: Multi-Layer Perceptrons and Applications in Pattern Recognition and Classification
+Author: Hy Truong Son
+Major: BSc. Computer Science
+Class: 2013 - 2016
+Institution: Eotvos Lorand University
+Email: sonpascal93@gmail.com
+Website: http://people.inf.elte.hu/hytruongson/
+Copyright 2015 (c) Hy Truong Son. All rights reserved. 
+Only use for academic purposes.
+
++---------------------+
+| General Information |
++---------------------+
+
+* Apply Multi-Layer Perceptrons (MLP, my own library) to recognize and classify patterns of multiple databases such as:
+- MNIST database: Digit handwritten database (Yann LeCun).
+- Hy Truong Son's handwriting database: My own lower-case and upper-case latin alphabet character handwriting. 
+- MIT-CBCL Face Database: Face and non-face patterns from MIT.
+- University of Bonn (Germany)'s NAO Robot Image Database: Robot-foot and non-robot-foot image database.
+
+* Users can choose database to train and test, as well as choose the architecture of the MLP network such as:
+- Number of layers.
+- Number of neurons in each layer.
+
+* Users can also check the performance of MLP after every steps and see how the feature extraction works for each type of data.
+
+* NetBeans project (Java JDK 8) with Graphical User Interfaces and visualization of Neural Network after each iteration and each training, testing sample.
+
+* Note: Each database has a different type of feature extraction. I converted all these images databases into binary data files for easier handling. 
+
++-----------------------------+
+| Implementation Architecture |
++-----------------------------+
+
+The codes are organized in the folder src/:
+
+Package MainProgram
+===================
+- MainProgram.java: The program starts here.
+- MainFrame.java: The starting frame.
+- AboutAuthor.java: About the author (me) frame.
+- AboutDatabase.java: About the 4 different databases.
+- AboutSoftware.java: Introduction of this software.
+
+Package MLP
+===========
+
+* Package MLP.HTS: For the Hy Truong Son's handwriting database
+
+- Package MLP.HTS.lower: For the lower-case character database
+    + Parameters.java: Choosing parameters frame (number of training, testing samples; number of layers; number of neurons in each layer; setting number of iterations for back-propagation algorithm; setting the learning rate for MLP).
+    + Training.java: Training frame.
+    + Testing.java: Testing.frame. 
+    
+- Package MLP.HTS.upper: For the upper-case character database
+    + Parameters.java: Choosing parameters frame (number of training, testing samples; number of layers; number of neurons in each layer; setting number of iterations for back-propagation algorithm; setting the learning rate for MLP).
+    + Training.java: Training frame.
+    + Testing.java: Testing.frame.  
+    
+* Package MLP.MIT: For the MIT-CBCL's Face Database
+- Parameters.java
+- Training.java
+- Testing.java
+
+* Package MLP.MNIST: For the MNIST digit handwritten database
+- Parameters.java
+- Training.java
+- Testing.java
+
+* Package MLP.UniBonn: For the University of Bonn's NAO Robot Image Database
+- Parameters.java
+- Training.java
+- Testing.java
+
+Package MyLib
+=============
+
+* MLP.java: My implementation, library for Multi-Layer Perceptrons (2-6 layers neural network architecture).
+
+* EnhanceGrayImage.java: Histogram equalization algorithm to enhance (constrast) gray-scale images.
+
+* SmoothGrayImage.java: Smoothing algorithm using Sobel's mask (matrix) to reduce noises in gray-scale images.
+
+* ColorHSV.java: Using HSV scale to classify RGB colors into 9 main colors.
+
+* Normalization.java: Fast algorithm to resize, normalize, standardize gray-scale images.
+
+* PGM256.java: Code to read PGM image format.
+
++-------------------+
+| Project Structure |
++-------------------+
+
+* File mnist-60000-model-784-128-10.dat:
+Containing weights (matrices) of the trained neural network for MNIST (60000 training samples) database:
+- Input layer: 784 neurons (28x28 image).
+- Hidden layer: 128 neurons.
+- Output layer: 10 neurons (0-9 digits).
+
+* File HTS-lower-15465-model-2500-128-26.dat:
+Containing weights (matrices) of the trained neural network for my lower-case character handwriting database (15465 training samples):
+- Input layer: 2500 neurons (50x50 image).
+- Hidden layer: 128 neurons.
+- Output layer: 26 neurons ('a'-'z' character).
+
+* File HTS-upper-15293-model-2500-128-26.dat:
+Containing weights (matrices) of the trained neural network for my upper-case characeter handwriting database (15293 training samples):
+- Input layer: 2500 neurons (50x50 image).
+- Hidden layer: 128 neurons.
+- Output layer: 26 neurons ('A'-'Z' character).
+
+* File mit-cbcl-6977-model-361-128-2.dat:
+Containing weights (matrices) of the trained neural network for the MIT-CBCL Face Database (6977 training samples):
+- Input layer: 361 neurons (19x19 image).
+- Hidden layer: 128 neurons.
+- Output layer: 2 neurons (Face vs non-face).
+
+* File uniBonn-598-model-400-128-2.dat:
+Containing weights (matrices) of the trained neural network for the University of Bonn (Germany)'s NAO Robot Image Database (598 training samples):
+- Input layer: 400 neurons (20x20 image).
+- Hidden layer: 128 neurons.
+- Output layer: 2 neurons (Robot vs non-robot).
+
+* Folder mnist-database/: Binary data files (image and label for training and testing phases).
+
+* Folder HyTruongSon-database/: 
+- Folder database-processing:
+    + repository.java: create paths (links) to each image files of the database.
+    + binary.java: compress all images and labels into binary files.
+- Other binary files: training and testing (images and labels) for lower-case characters and upper-case characters.
+
+* Folder NAO-UniBonn-database/: 
+- Folder database-processing:
+    + repository.java: create paths (links) to each image files of the database.
+    + binary.java: compress all images and labels into binary files.
+    + test.zip, train.zip: original images of the database.
+- Other binary files: training and testing (images and labels) for robot and non-robot images.
+
+* Folder MIT-CBCL-database/:
+- Folder database-processing:
+    + repository.java: create paths (links) to each image files of the database.
+    + binary.java: compress all images and labels into binary files.
+    + PGM256.java: code to read PGM type images.
+    + train.zip, test.zip: original images of the database.
+- File README: Readme file from MIT-CBCL
+- File svm.train.normgrey: Normalized gray-scale images for training (MIT-CBCL)
+- File svm.test.normgrey: Normalized gray-scale images for testing (MIT-CBCL)
+- Other binary files: training and testing (images and labels) for face and non-face images.
+
+* Folder about-databases/: Example images for each of these databases (used in the frame AboutDatabases.java).
+
+* Folder my-images/: Example images of myself and my family (used in the frame AboutAuthor.java).
+
+* Folder build/classes: Compiled classes.
+
+* Folder src/: Source codes.
